@@ -1,0 +1,20 @@
+<li
+  [ngClass]="{
+    'list-group-item': true,
+    'list-group-item-success': this.postItem.loveIts > 0,
+    'list-group-item-danger': this.postItem.loveIts < 0
+  }"
+>
+  <h2>{{ postItem.title }}</h2>
+  <p>{{ postItem.created_at | date }}</p>
+  <p>{{ postItem.content }}</p>
+  <p>like number : {{ postItem.loveIts }}</p>
+  <div class="like-button">
+    <button type="button" class="btn btn-primary" (click)="onLike()">
+      Love it!
+    </button>
+    <button type="button" class="btn btn-danger" (click)="onDislike()">
+      Dont love it!
+    </button>
+  </div>
+</li>
