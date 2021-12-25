@@ -7,6 +7,7 @@ import { MonPremierComponent } from './mon-premier/mon-premier.component';
 import { AppareilComponent } from './appareil/appareil.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostListItemComponent } from './post-list/post-list-item/post-list-item.component';
+import { AppareilService } from './services/appareil.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { PostListItemComponent } from './post-list/post-list-item/post-list-item
     PostListItemComponent,
   ],
   imports: [BrowserModule, FormsModule],
-  providers: [],
+  providers: [AppareilService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
