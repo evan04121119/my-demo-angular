@@ -9,8 +9,8 @@ import { AppareilService } from '../services/appareil.service';
 export class AppareilComponent implements OnInit {
   @Input() appareilName = 'machine à laver';
   @Input() appareilStatus = 'éteint';
-  @Input()
-  indexOfAppareil!: number;
+  @Input() indexOfAppareil!: number;
+  @Input() id!: number;
 
   myClassObject = {};
   constructor(private appareilService: AppareilService) {}
