@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppareilService } from './services/appareil.service';
-
+import 'rxjs/Rx';
+import { interval, Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   appareils: any[] = [];
   posts = [
     {
@@ -28,7 +29,19 @@ export class AppComponent implements OnInit {
       created_at: new Date('December 17, 1997 03:24:00'),
     },
   ];
-
+  secondes: number | undefined;
+  counterSubscription!: Subscription;
   constructor(private appareilService: AppareilService) {}
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+    const counter = interval(1000);
+    // sauvgarder le subscribe
+    this.counterSubscription = counter.subscribe((value: number) => {
+      this.secondes = value;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.counterSubscription.unsubscribe();
+  }
 }

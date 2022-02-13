@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AppareilService } from '../services/appareil.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class AppareilViewComponent implements OnInit {
     }, 2000);
   });
   appareils: any[] = [];
+  appareilSubscription: Subscription | undefined;
   constructor(private appareilService: AppareilService) {
     setTimeout(() => {
       this.isAuth = true;
@@ -23,7 +25,12 @@ export class AppareilViewComponent implements OnInit {
   }
   ngOnInit(): void {
     // après l'exection de constructor
-    this.appareils = this.appareilService.appareils;
+    this.appareilSubscription = this.appareilService.appareilSubject.subscribe(
+      (appareils: any[]) => {
+        this.appareils = appareils;
+      }
+    );
+    this.appareilService.emitAppareilSubject();
   }
   onAllumer() {
     this.appareilService.switchOnAll();
